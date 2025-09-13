@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hares Naseri Zulmai – Mini-Portfolio</title>
+  <meta name="description" content="Kleine Vorstellungsseite für Bewerbungen als Fachinformatiker Anwendungsentwicklung." />
+  <style>
+    :root { --bg:#0f172a; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; --accent:#22d3ee; }
+    *{box-sizing:border-box} body{margin:0;background:linear-gradient(160deg,#0b1224,#0f172a 40%,#0b1224);
+    color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;line-height:1.6}
+    .wrap{max-width:900px;margin:0 auto;padding:28px}
+    header{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:12px;background:radial-gradient(circle at 30% 30%,#22d3ee,transparent 40%),radial-gradient(circle at 70% 70%,#60a5fa,transparent 40%),#0ea5e9;border:2px solid #1f2937;box-shadow:0 0 0 4px rgba(255,255,255,.04)}
+    h1{margin:0;font-size:1.35rem}
+    nav a{color:var(--muted);text-decoration:none;margin-left:14px}
+    nav a:hover{color:var(--text)}
+    .card{background:linear-gradient(180deg,#0f172a,#0b1224);border:1px solid #1f2937;border-radius:14px;padding:18px;margin-top:18px}
+    .pill{display:inline-block;padding:4px 10px;border-radius:999px;background:#0b1325;border:1px solid #1f2937;color:var(--muted);font-size:.85rem}
+    ul{padding-left:18px;margin:10px 0}
+    .grid{display:grid;gap:14px}
+    @media (min-width:720px){ .grid{grid-template-columns:1fr 1fr}}
+    footer{margin:26px 0;color:var(--muted);font-size:.9rem}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid #1f2937;background:#0b1325;color:var(--text);text-decoration:none}
+    .btn:hover{border-color:#334155}
+    .accent{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Hares Naseri Zulmai</h1>
+          <div class="pill">Ausbildung gesucht: Fachinformatiker – Anwendungsentwicklung</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">Über mich</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projekte</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+    </header>
+
+    <section id="about" class="card">
+      <h2>Über mich</h2>
+      <p>Ich bin ein motivierter Quereinsteiger mit starkem Interesse an <strong>Softwareentwicklung</strong>.
+        Ziel: eine <strong>Ausbildung als Fachinformatiker Anwendungsentwicklung</strong> in Köln/NRW.
+        Ich lerne schnell, dokumentiere sauber und arbeite strukturiert.</p>
+    </section>
+
+    <section id="skills" class="card">
+      <h2>Technische Grundlagen</h2>
+      <ul>
+        <li>Web: HTML, CSS, JavaScript (Basis)</li>
+        <li>Python (Skripte, kleine Tools)</li>
+        <li>Git &amp; GitHub (Commit, Branch, README)</li>
+        <li>SQL/SQLite (einfache CRUD-Beispiele)</li>
+      </ul>
+    </section>
+
+    <section id="projects" class="card">
+      <h2>Beispielprojekte</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Meine erste Webseite</h3>
+          <p>Diese Seite: Minimal, sauber, mobilfreundlich. Ideal als digitale Visitenkarte.</p>
+          <a class="btn" href="#" aria-disabled="true">Demo (dieser Tab)</a>
+        </div>
+        <div class="card">
+          <h3>Python To-Do (CLI)</h3>
+          <p>Kleine Aufgabenliste in der Konsole: Hinzufügen, Auflisten, Speichern.</p>
+          <span class="pill">In Arbeit – wird bald verlinkt</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="card">
+      <h2>Kontakt</h2>
+      <p>E-Mail: <a class="accent" href="mailto:naseri.hares1987@gmail.com">naseri.hares1987@gmail.com</a></p>
+      <p>GitHub: <a class="accent" href="https://github.com/404-HunterPanchPuff" target="_blank" rel="noopener">github.com/404-HunterPanchPuff</a></p>
+    </section>
+
+    <footer>
+      <p>© <span id="y"></span> Hares Naseri Zulmai — Mini-Portfolio</p>
+    </footer>
+  </div>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>
