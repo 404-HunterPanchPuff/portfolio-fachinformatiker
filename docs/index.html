@@ -98,6 +98,52 @@ button:focus-visible{
 @media (prefers-reduced-motion: reduce){
   *{ transition: none !important; animation: none !important; }
 }
+    /* ====== Glass / Glow Header & Logo + Subtle Parallax ====== */
+/* پس‌زمینه شیشه‌ای برای هدر */
+header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: saturate(120%) blur(10px);
+  background: linear-gradient(180deg, rgba(15,23,42,.75), rgba(11,18,36,.55));
+  border: 1px solid rgba(51,65,85,.35);
+  border-radius: 14px;
+  padding: 12px 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+
+/* هاله‌ی ملایم دور لوگو */
+.logo{
+  position: relative;
+  box-shadow: 0 0 0 4px rgba(255,255,255,.04), 0 12px 28px rgba(34,211,238,.18);
+}
+.logo::after{
+  content:"";
+  position:absolute; inset:-6px;
+  border-radius:16px;
+  background: radial-gradient(60% 60% at 30% 30%, rgba(34,211,238,.18), transparent 60%),
+              radial-gradient(60% 60% at 70% 70%, rgba(96,165,250,.14), transparent 60%);
+  pointer-events:none;
+  filter: blur(2px);
+}
+
+/* خط تقسیم ظریف زیر هر بخش کارت‌دار */
+.card + .card{
+  margin-top: 22px;
+}
+
+/* افکت پارالاکس خیلی سبک روی گرادیان پس‌زمینه کل صفحه */
+body{
+  background-attachment: fixed; /* برای پارالاکس نرم */
+}
+
+/* کوچک به‌روز برای ناوبری در موبایل: فاصله و لمس بهتر */
+nav a{
+  padding: 6px 2px;
+  margin-left: 10px;
+  border-radius: 8px;
+}
+nav a:active{ transform: scale(.98); }
   </style>
 </head>
 <body>
@@ -162,5 +208,25 @@ button:focus-visible{
     </footer>
   </div>
   <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+  <script>
+  // پارالاکس بسیار سبک: جابجایی زاویه گرادیان پس‌زمینه با اسکرول
+  (function(){
+    const base = 160; // درجه پایه
+    let ticking = false;
+    function onScroll(){
+      if(!ticking){
+        window.requestAnimationFrame(function(){
+          const y = window.scrollY || 0;
+          const deg = base + Math.min(40, y * 0.04); // محدود تا 40 درجه
+          document.body.style.backgroundImage =
+            `linear-gradient(${deg}deg,#0b1224,#0f172a 40%,#0b1224)`;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+  })();
+</script>
 </body>
 </html>
