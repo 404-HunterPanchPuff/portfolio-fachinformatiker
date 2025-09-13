@@ -144,6 +144,40 @@ nav a{
   border-radius: 8px;
 }
 nav a:active{ transform: scale(.98); }
+    /* ===== Theme toggle styles ===== */
+.btn.toggle{
+  padding: 8px 10px;
+  border-radius: 10px;
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* حالت‌های رنگی: default = Dark (فعلی)، Dim = کمی روشن‌تر و کنتراست کمتر */
+:root{
+  --bg:#0f172a; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; --accent:#22d3ee;
+}
+:root.theme-dim{
+  --bg:#182238;
+  --card:#1f2937;
+  --text:#f3f4f6;
+  --muted:#b6c0cc;
+  --accent:#38e0f3;
+}
+
+/* تطبیق دادن رنگ‌ها با متغیرها (برای تم شدن) */
+body{
+  background: linear-gradient(160deg, var(--bg), #0b1224 40%, var(--bg));
+  color: var(--text);
+}
+.card{ background: linear-gradient(180deg, var(--bg), #0b1224); border:1px solid #1f2937; }
+nav a{ color: var(--muted); }
+nav a:hover{ color: var(--text); }
+.pill{ background:#0b1325; border:1px solid #1f2937; color: var(--muted); }
+.btn{ background:#0b1325; color:var(--text); border:1px solid #1f2937; }
+.btn:hover{ border-color:#3b485c; }
+.accent{ color: var(--accent); }
   </style>
 </head>
 <body>
@@ -162,6 +196,7 @@ nav a:active{ transform: scale(.98); }
         <a href="#projects">Projekte</a>
         <a href="#contact">Kontakt</a>
       </nav>
+      <button id="themeToggle" class="btn toggle" aria-label="Theme umschalten" title="Theme umschalten">🌓</button>
     </header>
 
     <section id="about" class="card">
@@ -228,5 +263,36 @@ nav a:active{ transform: scale(.98); }
     window.addEventListener('scroll', onScroll, {passive:true});
   })();
 </script>
+  <script>
+// Theme Toggle mit LocalStorage + Fallback auf prefers-color-scheme
+(function(){
+  const ROOT = document.documentElement;  // <html>
+  const KEY  = 'theme-preference';        // 'dark' | 'dim'
+  const btn  = document.getElementById('themeToggle');
+
+  function apply(theme){
+    if(theme === 'dim'){ ROOT.classList.add('theme-dim'); }
+    else{ ROOT.classList.remove('theme-dim'); }
+    localStorage.setItem(KEY, theme);
+    btn.textContent = theme === 'dim' ? '🌗' : '🌓';
+    btn.setAttribute('aria-label', theme === 'dim' ? 'Dim-Theme aktiv' : 'Dark-Theme aktiv');
+    btn.title = btn.getAttribute('aria-label');
+  }
+
+  // Initial: از LocalStorage یا از ترجیح سیستم
+  const stored = localStorage.getItem(KEY);
+  if(stored){ apply(stored); }
+  else{
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    apply(prefersDark ? 'dark' : 'dim'); // اگر سیستم dark است، dark؛ وگرنه dim
+  }
+
+  // Toggle on click
+  btn.addEventListener('click', () => {
+    const current = ROOT.classList.contains('theme-dim') ? 'dim' : 'dark';
+    apply(current === 'dark' ? 'dim' : 'dark');
+  });
+})();
+  </script>
 </body>
 </html>
